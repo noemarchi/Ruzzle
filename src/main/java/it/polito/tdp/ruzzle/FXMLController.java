@@ -2,6 +2,7 @@ package it.polito.tdp.ruzzle;
 
 import java.net.URL;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
 
@@ -23,97 +24,117 @@ public class FXMLController {
 	
     @FXML // ResourceBundle that was given to the FXMLLoader
     private ResourceBundle resources;
-
     @FXML // URL location of the FXML file that was given to the FXMLLoader
     private URL location;
-
     @FXML // fx:id="txtParola"
     private TextField txtParola; // Value injected by FXMLLoader
-
     @FXML // fx:id="btnProva"
     private Button btnProva; // Value injected by FXMLLoader
-
     @FXML // fx:id="let00"
     private Button let00; // Value injected by FXMLLoader
-
     @FXML // fx:id="let01"
     private Button let01; // Value injected by FXMLLoader
-
     @FXML // fx:id="let02"
     private Button let02; // Value injected by FXMLLoader
-
     @FXML // fx:id="let03"
     private Button let03; // Value injected by FXMLLoader
-
     @FXML // fx:id="let10"
     private Button let10; // Value injected by FXMLLoader
-
     @FXML // fx:id="let11"
     private Button let11; // Value injected by FXMLLoader
-
     @FXML // fx:id="let12"
     private Button let12; // Value injected by FXMLLoader
-
     @FXML // fx:id="let13"
     private Button let13; // Value injected by FXMLLoader
-
     @FXML // fx:id="let20" 
     private Button let20; // Value injected by FXMLLoader
-
     @FXML // fx:id="let21"
     private Button let21; // Value injected by FXMLLoader
-
     @FXML // fx:id="let22"
     private Button let22; // Value injected by FXMLLoader
-
     @FXML // fx:id="let23"
     private Button let23; // Value injected by FXMLLoader
-
     @FXML // fx:id="let30"
     private Button let30; // Value injected by FXMLLoader
-
     @FXML // fx:id="let31"
     private Button let31; // Value injected by FXMLLoader
-
     @FXML // fx:id="let32"
     private Button let32; // Value injected by FXMLLoader
-
     @FXML // fx:id="let33"
     private Button let33; // Value injected by FXMLLoader
-
     @FXML // fx:id="txtStatus"
     private Label txtStatus; // Value injected by FXMLLoader
-    
     @FXML // fx:id="txtResul"
     private TextArea txtResult; // Value injected by FXMLLoader
 
 
     @FXML
-    void handleProva(ActionEvent event) {
+    void handleProva(ActionEvent event) 
+    {
+    	// pulisco l'interfaccia grafica
+    	for(Pos p: letters.keySet())
+    	{
+    		letters.get(p).setDefaultButton(false);
+    	}
     		
-    	String parola = txtParola.getText() ;
-    	if(parola.length() <= 1) {
+    	// acquisisco e controllo i dati
+    	String parola = txtParola.getText();
+    	
+    	if(parola.length() <= 1) 
+    	{
     		txtResult.setText("Devi inserire parole di almeno 2 lettere");
     		return;
     	}
+    	
     	parola = parola.toUpperCase();
+    	
     	//controllo che ci siano solo caratteri A-Z
-    	if(!parola.matches("[A-Z]+")) {
+    	if(!parola.matches("[A-Z]+")) 
+    	{
     		txtResult.setText("Devi inserire solo caratteri alfabetici!");
     		return ;
     	}
     	
-    	//TODO
+    	// illumino le lettere sulla board, se la parola viene trovata
+    	List<Pos> posizioni = this.model.trovaParola(parola);
+    	
+    	if(posizioni != null)
+    	{	// la parola c'è
+    		
+    		for(Pos p: posizioni)
+    		{
+    			letters.get(p).setDefaultButton(true);
+    		}
+    	}
+    	
     }
 
     @FXML
-    void handleReset(ActionEvent event) {
+    void handleReset(ActionEvent event) 
+    {
+    	// pulisco l'interfaccia grafica
+    	for(Pos p: letters.keySet())
+    	{
+    		letters.get(p).setDefaultButton(false);
+    	}
+    	
+    	this.txtResult.clear();
+    	this.txtParola.clear();
+    	
     	model.reset();
     }
     
     @FXML
-    void handleRisolvi(ActionEvent event) {
-    	//TODO
+    void handleRisolvi(ActionEvent event) 
+    {
+    	List<String> tutte = this.model.trovaTutte();
+    	
+    	this.txtResult.setText("Ho trovato " + tutte.size() + " parole! \n");
+    	
+    	for(String s: tutte)
+    	{
+    		this.txtResult.appendText(s + "\n");
+    	}
     }
 
     @FXML // This method is called by the FXMLLoader when initialization is complete
@@ -141,7 +162,8 @@ public class FXMLController {
 
     }
     
-    public void setModel(Model m) {
+    public void setModel(Model m) 
+    {
     	this.model = m ;
     	
     	this.letters = new HashMap<>() ;
@@ -167,7 +189,8 @@ public class FXMLController {
     	this.letters.put(new Pos(3,3), let33) ;
 
     	//BINDNG: associo ad ogni bottone la StringProperty della relativa cella
-    	for(Pos cell: m.getBoard().getPositions()) {
+    	for(Pos cell: m.getBoard().getPositions()) 
+    	{
     		this.letters.get(cell).textProperty().bind(m.getBoard().getCellValueProperty(cell));
     	}
     	

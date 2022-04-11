@@ -1,0 +1,29 @@
+INPUT PROBLEMA:
+	- Stringa da riconoscere 'parola'
+	- Contenuto della Board (matrice di lettere)
+	- posizione della prima lettera di 'parola'
+	
+SOLUZIONE PARZIALE:
+	- Una stringa, la parte della parola che ho già riconosciuto
+	- Elenco delle posizione delle lettere della parola
+	
+SOLUZIONE TOTALE: 
+	- La parola riconosciuta per intero
+	- Elenco delle posizione delle lettere della parola soluzione
+	
+LIVELLO DELLA RICORSIONE:
+	- Numero di caratteri riconosciuti (o Size di parizale)
+	
+CONDIZIONI DI TERMINAZIONE:
+	- Quando livello == lunghezza della parola da riconoscere
+	- Se viene trovata 'parola', stoppo la ricorsione
+	
+AVVIO RICORSIONE
+	- parto dalla posizione della prima lettera (se c'è) della parola
+	--> parto dal livello 1
+	
+STRUTTURE DATI:
+	- parziale --> String
+	- livello --> int
+	- posizioni, percorso di parziale --> List<Pos> 
+	

@@ -4,39 +4,47 @@ package it.polito.tdp.ruzzle.model;
  * Classe che indentifica la posizione di una casella del gioco
  * 
  */
-public class Pos {
+public class Pos 
+{
 	private int row;
 	private int col;
 
-	public Pos(int row, int col) {
+	public Pos(int row, int col) 
+	{
 		super();
 		this.row = row;
 		this.col = col;
 	}
 
-	public int getRow() {
+	public int getRow() 
+	{
 		return row;
 	}
 
-	public void setRow(int row) {
+	public void setRow(int row) 
+	{
 		this.row = row;
 	}
 
-	public int getCol() {
+	public int getCol() 
+	{
 		return col;
 	}
 
-	public void setCol(int col) {
+	public void setCol(int col) 
+	{
 		this.col = col;
 	}
 
 	@Override
-	public String toString() {
+	public String toString() 
+	{
 		return String.format("[%s,%s]", row, col);
 	}
 
 	@Override
-	public int hashCode() {
+	public int hashCode() 
+	{
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + col;
@@ -45,7 +53,8 @@ public class Pos {
 	}
 
 	@Override
-	public boolean equals(Object obj) {
+	public boolean equals(Object obj) 
+	{
 		if (this == obj)
 			return true;
 		if (obj == null)

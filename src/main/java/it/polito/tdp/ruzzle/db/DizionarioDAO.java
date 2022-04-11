@@ -7,25 +7,29 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DizionarioDAO {
+public class DizionarioDAO 
+{
 	
 	/**
 	 * Ritorna tutte le parole presenti nel dizionario
 	 * 
 	 * @return
 	 */
-	public List<String> listParola() {
+	public List<String> listParola() 
+	{
 		List<String> result = new ArrayList<>() ;
 		
 		String query = "SELECT nome FROM parola ORDER BY nome" ;
 		
-		try {
+		try 
+		{
 			Connection conn = DBConnect.getConnection() ;
 			PreparedStatement st = conn.prepareStatement(query) ;
 			
 			ResultSet res = st.executeQuery() ;
 			
-			while(res.next()) {
+			while(res.next()) 
+			{
 				result.add(res.getString("nome")) ;
 			}
 			
@@ -33,8 +37,9 @@ public class DizionarioDAO {
 			conn.close();
 			
 			
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+		} 
+		catch (SQLException e) 
+		{
 			e.printStackTrace();
 		}
 		return result ;

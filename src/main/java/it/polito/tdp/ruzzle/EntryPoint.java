@@ -11,7 +11,8 @@ import javafx.stage.Stage;
 public class EntryPoint extends Application {
 
     @Override
-    public void start(Stage stage) throws Exception {
+    public void start(Stage stage) throws Exception 
+    {
     	
     	FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Scene.fxml"));
     	Parent root = loader.load();
@@ -20,7 +21,7 @@ public class EntryPoint extends Application {
         Model model = new Model();
         FXMLController controller = loader.getController();
         controller.setModel(model);
-        scene.getRoot().setStyle("-fx-font-family: 'Verdana'");
+        scene.getRoot().setStyle("-fx-font-family: 'serif'");
 
         stage.setTitle("Ruzzle");
         stage.setScene(scene);
@@ -36,7 +37,8 @@ public class EntryPoint extends Application {
      *
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) 
+    {
         launch(args);
     }
 
